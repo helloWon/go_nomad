@@ -1,12 +1,15 @@
 package main
 
-import (
-	"fmt"
-	"hello/something"
-)
+import "fmt"
 
 func main()  {
-	fmt.Println("Hello world!");
-	something.SayHello();
-	// something.sayBye();
+	// const name string = "sw"
+	var name string = "sw"
+	name = "lynn"
+	fmt.Println(name)
+
+	name2 := "sw"
+	name2 = "lynn"
+	fmt.Println(name2)
+
 }
