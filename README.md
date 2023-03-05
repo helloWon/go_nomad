@@ -1,8 +1,10 @@
-# golang
+# Let's golang
 
 Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 
 ---
+
+# 1. Theory
 
 ## 1.1 Packages and Imports
 
@@ -50,3 +52,13 @@ Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 -   go는 class와 object가 따로 없음
 -   map과 달리 여러 type의 value 가지기 가능
 -   python에 \_\_init\_\_ 과 같은 constructer method가 없어 직접 실행시켜야함
+
+<br><br>
+
+# 3. URL CHECKER & GO ROUTINES
+
+## 3.2 Goroutines
+
+-   앞에 'go'만 붙이면 됨
+-   goroutines은 main func이 실행되는 동안만 유효
+-   main func은 goroutines를 기다려주지 않음
