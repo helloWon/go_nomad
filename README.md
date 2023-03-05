@@ -23,3 +23,5 @@ Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 -   'defer': finally절 같이 func 종료 후 추가 작업 명시
 
 ## 1.5 for, range
+
+-   for 문법 1개뿐
