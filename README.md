@@ -67,3 +67,4 @@ Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 
 -   goroutines과 main func 사이의 소통창구
 -   '<-' 로 채널의 메세지 받기
+-   waiting for a message: blocking operation!
