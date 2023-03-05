@@ -47,3 +47,6 @@ Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 
 ## 1.11 Structs
 
+-   go는 class와 object가 따로 없음
+-   map과 달리 여러 type의 value 가지기 가능
+-   python에 \_\_init\_\_ 과 같은 constructer method가 없어 직접 실행시켜야함
