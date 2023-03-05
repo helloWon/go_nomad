@@ -29,3 +29,14 @@ Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 ## 1.6 If with a Twist
 
 -   if else 조건문에서만 사용하는 변수 선언 가능
+
+## 1.8 Pointers
+
+-   low level programming
+-   &a: 변수 a의 메모리상 주소값 (=address)
+-   \*a: 변수 a가 가리키는 값 (=see through)
+
+## 1.9 Arrays and Slices
+
+-   arrays: static 크기
+-   slices: dynamic 크기
