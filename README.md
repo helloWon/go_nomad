@@ -25,3 +25,7 @@ Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 ## 1.5 for, range
 
 -   for 문법 1개뿐
+
+## 1.6 If with a Twist
+
+-   if else 조건문에서만 사용하는 변수 선언 가능
