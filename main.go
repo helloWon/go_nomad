@@ -52,9 +52,21 @@ import (
 // }
 
 func main() {
-	go sexyCount("nico")
-	go sexyCount("lynn")
+	c := make(chan bool)
+	people := [2]string{"nico", "lynn"}
+	for _, person := range people {
+		go isSexy(person, c)
+	}
+	// time.Sleep(time.Second * 5)
+	result := <-c // 메세지 1개 받을때까지 기다림
+	fmt.Println(result)
+	fmt.Println(<-c)
+}
+
+func isSexy(person string, c chan bool) {
 	time.Sleep(time.Second * 5)
+	fmt.Println(person)
+	c <- true
 }
 
 func sexyCount(person string) {

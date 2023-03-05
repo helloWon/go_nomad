@@ -62,3 +62,8 @@ Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 -   앞에 'go'만 붙이면 됨
 -   goroutines은 main func이 실행되는 동안만 유효
 -   main func은 goroutines를 기다려주지 않음
+
+## 3.3 Channels
+
+-   goroutines과 main func 사이의 소통창구
+-   '<-' 로 채널의 메세지 받기
