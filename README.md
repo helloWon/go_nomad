@@ -40,3 +40,10 @@ Practice tutorial by nico: https://nomadcoders.co/go-for-beginners
 
 -   arrays: static 크기
 -   slices: dynamic 크기
+
+## 1.10 Maps
+
+-   key: value
+
+## 1.11 Structs
+
