@@ -2,64 +2,54 @@ package main
 
 import (
 	"fmt"
-	"hello/mydict"
+	"log"
+	"net/http"
+	"strconv"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
+var baseURL string = "https://www.saramin.co.kr/zf_user/search/recruit?&searchword=python"
+
 func main() {
-	// account := accounts.NewAccount("nico")
+	totalPages := getPages()
 
-	// account.Deposit(10)
-	// fmt.Println(account.Balance())
-
-	// // err := account.Withdraw(20)
-	// // if err != nil {
-	// // 	log.Fatalln(err)
-	// // }
-
-	// err := account.Withdraw(10)
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
-	// fmt.Println(account.String())
-
-	dictionary := mydict.Dictionary{"first": "First word"}
-	definition, err := dictionary.Search("second")
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println(definition)
+	for i := 0; i < totalPages; i++ {
+		getPage(i)
 	}
-	fmt.Println(dictionary["first"])
+}
 
-	word := "hello"
-	def := "Greeting"
-	err = dictionary.Add(word, def)
-	if err != nil {
-		fmt.Println(err)
-	}
-	hello, err2 := dictionary.Search("hello")
-	fmt.Println(hello)
-	if err2 != nil {
-		fmt.Println(err2)
-	}
+func getPage(page int) {
+	pageURL := baseURL + "&start=" + strconv.Itoa(page*50)
+	fmt.Println("Requesting", pageURL)
+}
 
-	baseWord := "hello"
-	dictionary.Add(baseWord, "First")
-	// Update
-	err = dictionary.Update(baseWord, "Second")
-	if err != nil {
-		fmt.Println(err)
-	}
-	word, _ = dictionary.Search(baseWord)
-	fmt.Println(word)
+func getPages() int {
+	pages := 0
+	res, err := http.Get(baseURL)
+	checkErr(err)
+	checkCode(res)
 
-	dictionary.Add(baseWord, "First")
-	dictionary.Search(baseWord)
-	dictionary.Delete(baseWord)
-	word, _ = dictionary.Search(baseWord)
+	defer res.Body.Close()
+
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	checkErr(err)
+
+	doc.Find(".pagination").Each(func(i int, s *goquery.Selection) {
+		// fmt.Println(s.Html())
+		pages = s.Find("a").Length()
+	})
+	return pages
+}
+
+func checkErr(err error) {
 	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println(word)
+		log.Fatalln(err)
+	}
+}
+
+func checkCode(res *http.Response) {
+	if res.StatusCode != 200 {
+		log.Fatalln("Request failed with Status:", res.StatusCode)
 	}
 }

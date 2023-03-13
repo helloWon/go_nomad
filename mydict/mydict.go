@@ -11,6 +11,8 @@ var (
 	errCantUpdate = errors.New("Cant update non-existing word")
 )
 
+// title := cleanString(card.Find(".area_job>.job_tit>a").Text())
+// location := cleanString(card.Find(".area_job>.job_condition>span>a").Text())
 // Search for a word
 func (d Dictionary) Search(word string) (string, error) {
 	value, exists := d[word]
