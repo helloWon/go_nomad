@@ -24,11 +24,16 @@ var baseURL string = "https://www.saramin.co.kr/zf_user/search/recruit?&searchwo
 
 func main() {
 	var jobs []extractedJob
+	c := make(chan []extractedJob)
 	totalPages := getPages()
 
 	for i := 0; i < totalPages; i++ {
-		extractJobs := getPage(i)
-		jobs = append(jobs, extractJobs...) // list.extend()
+		go getPage(i, c)
+	}
+
+	for i := 0; i < totalPages; i++ {
+		extractedJobs := <-c
+		jobs = append(jobs, extractedJobs...)
 	}
 	writeJobs(jobs)
 	fmt.Println("Done, extracted", len(jobs))
@@ -54,7 +59,7 @@ func writeJobs(jobs []extractedJob) {
 	}
 }
 
-func getPage(page int) []extractedJob {
+func getPage(page int, mainC chan<- []extractedJob) {
 	var jobs []extractedJob
 	c := make(chan extractedJob)
 	pageURL := baseURL + "&start=" + strconv.Itoa(page*50)
@@ -75,10 +80,10 @@ func getPage(page int) []extractedJob {
 		job := <-c
 		jobs = append(jobs, job)
 	}
-	return jobs
+	mainC <- jobs
 }
 
-func extractJob(card *goquery.Selection, c chan<- extractedJob) extractedJob {
+func extractJob(card *goquery.Selection, c chan<- extractedJob) {
 	id, _ := card.Attr("value")
 	title := cleanString(card.Find("h2>a>span").Text())
 	location := cleanString(card.Find(".job_condition>span>a").Text())
